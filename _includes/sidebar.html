@@ -1,70 +1,105 @@
-<div>
-{% for member in site.data.pi %}
-<div class="jumbotron">
-   <center>
-   <a href="{{site.url}}{{site.baseurl}}/about"><img src="{{site.url}}{{site.baseurl}}/images/{{ member.photo }}" width="60%" style="block:inline; margin-left:auto; margin-right:auto; margin-bottom:5px;"/></a>
-   <h4>{{ member.name }}</h4>
-   <div style="margin-bottom:5px">
-   {% if member.email %}<a href="mailto:{{ member.email }}" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a> {% endif %}
-   {% if member.cv %} <a href="{{ site.url }}{{ site.baseurl }}/{{ member.cv }}" target="_blank"><i class="ai ai-cv-square ai-3x"></i></a> {% endif %}
-   {% if member.scholar %} <a href="{{ member.scholar }}" target="_blank"><i class="ai ai-google-scholar-square ai-3x"></i></a> {% endif %}
-   {% if member.github %} <a href="{{ member.github }}" target="_blank"><i class="fa fa-github-square fa-3x"></i></a> {% endif %}
-   {% if member.researchgate %} <a href="{{ member.researchgate }}" target="_blank"><i class="ai ai-researchgate-square ai-3x"></i></a> {% endif %}
+<!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle">
+      {% if site.avatar != empty and site.avatar %}
+        {% capture avatar_url %}
+            {% if site.avatar contains '://' %}
+              {{ site.avatar }}
+            {% elsif site.img_cdn != empty and site.img_cdn %}
+              {{ site.avatar | prepend: site.img_cdn }}
+            {% else %}
+              {{ site.avatar | relative_url }}
+            {% endif %}
+          {% endcapture %}
+        <img src="{{ avatar_url | strip }}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+      {% endif %}
+    </a>
+
+    <h1 class="site-title">
+      <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    </h1>
+    <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
+        <a href="{{ '/' | relative_url }}" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>{{ site.data.locales[include.lang].tabs.home | upcase }}</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      {% for tab in site.tabs %}
+        <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
+          <a href="{{ tab.url | relative_url }}" class="nav-link">
+            <i class="fa-fw {{ tab.icon }}"></i>
+            {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+
+            <span>{{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    {% unless site.theme_mode %}
+      <button type="button" class="mode-toggle btn" aria-label="Switch Mode">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      {% if site.data.contact.size > 0 %}
+        <span class="icon-border"></span>
+      {% endif %}
+    {% endunless %}
+
+    {% for entry in site.data.contact %}
+      {% case entry.type %}
+        {% when 'github', 'twitter' %}
+          {%- capture url -%}
+            https://{{ entry.type }}.com/{{ site[entry.type].username }}
+          {%- endcapture -%}
+        {% when 'email' %}
+          {% assign email = site.social.email | split: '@' %}
+          {%- capture url -%}
+            javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
+          {%- endcapture -%}
+        {% when 'rss' %}
+          {% assign url = '/feed.xml' | relative_url %}
+        {% else %}
+          {% assign url = entry.url %}
+      {% endcase %}
+
+      {% if url %}
+        <a
+          href="{{ url }}"
+          aria-label="{{ entry.type }}"
+          {% assign link_types = '' %}
+
+          {% unless entry.noblank %}
+            target="_blank"
+            {% assign link_types = 'noopener noreferrer' %}
+          {% endunless %}
+
+          {% if entry.type == 'mastodon' %}
+            {% assign link_types = link_types | append: ' me' | strip %}
+          {% endif %}
+
+          {% unless link_types == empty %}
+            rel="{{ link_types }}"
+          {% endunless %}
+        >
+          <i class="{{ entry.icon }}"></i>
+        </a>
+      {% endif %}
+    {% endfor %}
   </div>
-  </center>
-
-  <ul style="overflow: hidden">
-  {% if member.number_educ == 1 %}
-  <li> {{ member.education1short | replace: "-","&#8211;"}} </li>
-  {% endif %}
-
-  {% if member.number_educ == 2 %}
-  <li> {{ member.education1short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education2short | replace: "-","&#8211;"}} </li>
-  {% endif %}
-
-  {% if member.number_educ == 3 %}
-  <li> {{ member.education1short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education2short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education3short }} </li>
-  {% endif %}
-
-  {% if member.number_educ == 4 %}
-  <li> {{ member.education1short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education2short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education3short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education4short | replace: "-","&#8211;"}} </li>
-  {% endif %}
-
-  {% if member.number_educ == 5 %}
-  <li> {{ member.education1short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education2short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education3short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education4short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education5short | replace: "-","&#8211;"}} </li>
-  {% endif %}
-
-  {% if member.number_educ == 6 %}
-  <li> {{ member.education1short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education2short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education3short | replace: "-","&#8211;"}} </li>
-  <li> {{ member.education4short | replace: "-","&#8211;"}} </li>
-  <!-- <li> {{ member.education5short | replace: "-","&#8211;"}} </li> -->
-  <li> {{ member.education6short | replace: "-","&#8211;"}} </li>
-  {% endif %}
-  </ul>
-</div>
-{% endfor %}
-</div>
-
-<div class="jumbotron">
-  <h4>News</h4>
-
-  {% for article in site.data.news limit:3 %}
-  <b>{{ article.date }}</b>
-    <p>{{ article.headline }}</p>
-  {% endfor %}
-  
-  <h5><a href="{{ site.url }}{{ site.baseurl }}/allnews.html">... see all News</a></h5>
-
-</div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->

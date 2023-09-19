@@ -1,28 +1,36 @@
-<br/>
-<section id="footer">
-<div class="container-footer">
-  <div class="panel-footer">
-	  <div class="row">
-		<div class="col-sm-4">
-		    <h5>About</h5>	
-            <p>{{ site.affiliation }}</p>
-		</div>
+<!-- The Footer -->
 
-		<div class="col-sm-4">
-		    <h5>Contact</h5>	
-            <p>{{ site.contact }}</p>
-		</div>
+<footer
+  aria-label="Site Info"
+  class="
+    d-flex flex-column justify-content-center text-muted
+    flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
+  "
+>
+  <p>
+    {{ '©' }}
+    <time>{{ 'now' | date: '%Y' }}</time>
+    <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
+    {% if site.data.locales[include.lang].copyright.brief %}
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="{{ site.data.locales[include.lang].copyright.verbose }}"
+      >
+        {{- site.data.locales[include.lang].copyright.brief -}}
+      </span>
+    {% endif %}
+  </p>
 
-		<div class="col-sm-4">
-		    <h5>Coordinates</h5>	
-            <p>{{ site.location }}</p>
-		</div>
-	  </div>
+  <p>
+    {%- capture _platform -%}
+      <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
+    {%- endcapture -%}
 
-      <center><p>&copy {{ "now" | date: "%Y" }} {{site.title | escape }} </p></center>
-	</div>
-  </div>
-</div>
+    {%- capture _theme -%}
+      <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a>
+    {%- endcapture -%}
 
-<script src="{{ "/assets/javascript/bootstrap/jquery.min.js" | relative_url }}"></script>
-<script src="{{ "/assets/javascript/bootstrap/bootstrap.bundle.min.js" | relative_url }}"></script>
+    {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
+  </p>
+</footer>
