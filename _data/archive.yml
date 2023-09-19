@@ -7,3 +7,12 @@
 - type: tags
   title: Tags
   url: /tags/
+- type: education
+  title: Education
+  url: /education/
+- type: teaching
+  title: Teaching
+  url: /teaching/
+- type: about
+  title: About
+  url: /about/
