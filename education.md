@@ -1,9 +1,6 @@
-## Education
-
 **Master of Science in Computer Engineering**
 
 *Sharif University of Technology, Tehran, Iran, 2021 - Present*
-
 
 **Bachelor of Science in Computer Engineering**
 
