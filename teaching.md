@@ -1,3 +1,9 @@
+---
+layout: archive-teaching
+permalink: /teaching/
+title: Teaching
+type: teaching
+---
 
 - Security and Privacy of Machine Learning, Sharif University of Technology
 - Data and Network Security, Sharif University of Technology
