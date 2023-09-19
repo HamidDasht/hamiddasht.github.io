@@ -1,6 +1,9 @@
 - title: Email
-  url: mailto://hamiddb77@gmail.com
+  url: mailto:hamiddb77@gmail.com
   icon: fas fa-envelope
 - title: GitHub
   url: https://github.com/HamidDasht/
   icon: fab fa-github
+- title: LinkedIn
+  url: https://www.linkedin.com/in/hamiddasht/
+  icon: fab fa-linkedin
