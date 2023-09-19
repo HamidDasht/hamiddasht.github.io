@@ -1,7 +1,7 @@
 # Setup
-title: Not Pure Poole
-description: A simple, beautiful, and powerful Jekyll theme for blogs
-url: https://vszhub.github.io
+title: Hamid Dashtbani
+description: M.Sc. Student at Sharif University of Technology
+url: https://hamiddasht.github.io
 avatar: /avatar.jpeg
 paginate: 5
 permalink: pretty
@@ -30,7 +30,7 @@ exclude:
 # Optimize Jekyl SEO Tag
 logo: logo.png
 social:
-  name: Songzi Vong
+  name: Hamid Dashtbani
   links:
     - https://github.com/hamiddasht
 google_site_verification: xxxxx
