@@ -13,6 +13,9 @@
 - type: teaching
   title: Teaching
   url: /teaching/
+- type: home
+  title: Home
+  url: /
 #- type: about
 #  title: About
 #  url: /about/
