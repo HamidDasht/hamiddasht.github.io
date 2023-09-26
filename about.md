@@ -8,7 +8,7 @@ I received my bachelor degree from the [Computer and Electrical Engineering depa
 
 ## Research
 
-I have a broad interest in the intersection of AI and computer security, including application of AI to computer security and AI security topics. Generally speaking, my B.Sc. thesis was on the application of AI in software security and my M.Sc. thesis is on adversarial machine learning.
+I have a broad interest in the intersection of AI and computer security, including the application of AI to computer security and AI security. Generally speaking, my B.Sc. thesis was on the application of AI in software security, and my M.Sc. thesis is on adversarial machine learning.
 
 #### Research Interests
 
